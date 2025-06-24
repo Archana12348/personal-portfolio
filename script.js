@@ -152,38 +152,36 @@ if (aboutSection) {
 }
 
 // Certificate modal functionality
-document.querySelectorAll(".certificate-card").forEach((card) => {
-  card.addEventListener("click", function () {
-    const img = this.querySelector("img")
-    const title = this.querySelector("h5").textContent
+document.querySelectorAll(".certificate-image img").forEach((img) => {
+  img.addEventListener("click", function () {
+    const title = this.closest(".certificate-card").querySelector("h5").textContent
 
-    // Create modal
     const modal = document.createElement("div")
     modal.className = "modal fade"
     modal.innerHTML = `
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">${title}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img src="${img.src}" alt="${title}" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        `
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">${title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img src="${this.src}" alt="${title}" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    `
 
     document.body.appendChild(modal)
     const bsModal = new bootstrap.Modal(modal)
     bsModal.show()
 
-    // Remove modal from DOM when hidden
     modal.addEventListener("hidden.bs.modal", () => {
       modal.remove()
     })
   })
 })
+
 
 // Parallax effect for hero section
 window.addEventListener("scroll", () => {
@@ -254,17 +252,7 @@ console.log(`
 
 Thanks for checking out the code! 😊
 `)
-// Start typing effect on page load
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(type, typingSpeed);
-});
-document.addEventListener('visibilitychange',
-  function() {
-      if (document.visibilityState === "visible") {
-          document.title = "Projects | Portfolio Archana Gupta";
-          $("#favicon").attr("href", "/assets/images/favicon.png");
-      } else {
-          document.title = "Come Back To Portfolio";
-          $("#favicon").attr("href", "/assets/images/favhand.png");
-      }
-  });
+document.querySelectorAll(".certificate-card img").forEach((img) => {
+  img.addEventListener("contextmenu", (e) => e.preventDefault())
+})
+

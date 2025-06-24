@@ -416,6 +416,7 @@ section {
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .certificate-card:hover .certificate-overlay {
@@ -941,44 +942,6 @@ footer p {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
-.custom-alert {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
-  min-width: 300px;
-  padding: 15px 20px;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  animation: slideInRight 0.5s ease;
-  gap: 10px;
-}
 
-.custom-alert.success {
-  background: linear-gradient(135deg, #06b6d4, #fb923c); /* blue to orange gradient */
-}
-
-.custom-alert.error {
-  background: linear-gradient(135deg, #ef4444, #f97316); /* red to orange gradient */
-}
-
-.custom-alert i {
-  margin-right: 10px;
-  font-size: 1.2rem;
-}
-
-.custom-alert button {
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 0 5px;
-}
 
 
