@@ -254,4 +254,17 @@ console.log(`
 
 Thanks for checking out the code! 😊
 `)
-
+// Start typing effect on page load
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(type, typingSpeed);
+});
+document.addEventListener('visibilitychange',
+  function() {
+      if (document.visibilityState === "visible") {
+          document.title = "Projects | Portfolio Archana Gupta";
+          $("#favicon").attr("href", "/assets/images/favicon.png");
+      } else {
+          document.title = "Come Back To Portfolio";
+          $("#favicon").attr("href", "/assets/images/favhand.png");
+      }
+  });
