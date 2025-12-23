@@ -3,161 +3,164 @@ AOS.init({
   duration: 1000,
   once: true,
   offset: 100,
-})
+});
 
 // Navbar scroll effect
 window.addEventListener("scroll", () => {
-  const navbar = document.querySelector(".custom-navbar")
+  const navbar = document.querySelector(".custom-navbar");
   if (window.scrollY > 50) {
-    navbar.classList.add("scrolled")
+    navbar.classList.add("scrolled");
   } else {
-    navbar.classList.remove("scrolled")
+    navbar.classList.remove("scrolled");
   }
-})
+});
 
 // Back to top button
-const backToTopBtn = document.getElementById("backToTop")
+const backToTopBtn = document.getElementById("backToTop");
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 300) {
-    backToTopBtn.classList.add("show")
+    backToTopBtn.classList.add("show");
   } else {
-    backToTopBtn.classList.remove("show")
+    backToTopBtn.classList.remove("show");
   }
-})
+});
 
 backToTopBtn.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
     behavior: "smooth",
-  })
-})
+  });
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault()
-    const target = document.querySelector(this.getAttribute("href"))
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
     if (target) {
       target.scrollIntoView({
         behavior: "smooth",
         block: "start",
-      })
+      });
     }
-  })
-})
+  });
+});
 
 // Contact form handling
 function showNotification(message, type) {
-  const alertBox = document.createElement("div")
-  alertBox.className = `custom-alert ${type}`
+  const alertBox = document.createElement("div");
+  alertBox.className = `custom-alert ${type}`;
   alertBox.innerHTML = `
-    <i class="fas fa-${type === "success" ? "check-circle" : "exclamation-circle"}"></i>
+    <i class="fas fa-${
+      type === "success" ? "check-circle" : "exclamation-circle"
+    }"></i>
     ${message}
     <button onclick="this.parentElement.remove()">&times;</button>
-  `
-  document.body.appendChild(alertBox)
+  `;
+  document.body.appendChild(alertBox);
 
   // Auto remove after 5 seconds
   setTimeout(() => {
     if (alertBox.parentElement) {
-      alertBox.remove()
+      alertBox.remove();
     }
-  }, 5000)
+  }, 5000);
 }
 
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-  e.preventDefault()
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  const formData = new FormData(this)
-  const submitBtn = this.querySelector('button[type="submit"]')
-  const originalText = submitBtn.innerHTML
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
 
-  // Show loading state
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...'
-  submitBtn.disabled = true
+    // Show loading state
+    submitBtn.innerHTML =
+      '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+    submitBtn.disabled = true;
 
-  try {
-    // Simulate form submission (replace with actual backend endpoint)
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      // Simulate form submission (replace with actual backend endpoint)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Show success message
-    showNotification("Message sent successfully!", "success")
-    this.reset()
-  } catch (error) {
-    // Show error message
-    showNotification("Failed to send message. Please try again.", "error")
-  } finally {
-    // Reset button
-    submitBtn.innerHTML = originalText
-    submitBtn.disabled = false
-  }
-})
-
-
-
+      // Show success message
+      showNotification("Message sent successfully!", "success");
+      this.reset();
+    } catch (error) {
+      // Show error message
+      showNotification("Failed to send message. Please try again.", "error");
+    } finally {
+      // Reset button
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  });
 
 // Typing animation for hero section
 function typeWriter(element, text, speed = 100) {
-  let i = 0
-  element.innerHTML = ""
+  let i = 0;
+  element.innerHTML = "";
 
   function type() {
     if (i < text.length) {
-      element.innerHTML += text.charAt(i)
-      i++
-      setTimeout(type, speed)
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
     }
   }
 
-  type()
+  type();
 }
 
 // Initialize typing animation when page loads
 window.addEventListener("load", () => {
-  const heroSubtitle = document.querySelector(".hero-subtitle")
+  const heroSubtitle = document.querySelector(".hero-subtitle");
   if (heroSubtitle) {
-    const originalText = heroSubtitle.textContent
-    typeWriter(heroSubtitle, originalText, 50)
+    const originalText = heroSubtitle.textContent;
+    typeWriter(heroSubtitle, originalText, 50);
   }
-})
+});
 
 // Skill bars animation
 function animateSkillBars() {
-  const skillBars = document.querySelectorAll(".progress-bar")
+  const skillBars = document.querySelectorAll(".progress-bar");
 
   skillBars.forEach((bar) => {
-    const width = bar.style.width
-    bar.style.width = "0%"
+    const width = bar.style.width;
+    bar.style.width = "0%";
 
     setTimeout(() => {
-      bar.style.width = width
-    }, 500)
-  })
+      bar.style.width = width;
+    }, 500);
+  });
 }
 
 // Trigger skill bars animation when about section is in view
-const aboutSection = document.getElementById("about")
+const aboutSection = document.getElementById("about");
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      animateSkillBars()
-      observer.unobserve(entry.target)
+      animateSkillBars();
+      observer.unobserve(entry.target);
     }
-  })
-})
+  });
+});
 
 if (aboutSection) {
-  observer.observe(aboutSection)
+  observer.observe(aboutSection);
 }
 
 // Certificate modal functionality
 document.querySelectorAll(".certificate-image img").forEach((img) => {
   img.addEventListener("click", function () {
-    const title = this.closest(".certificate-card").querySelector("h5").textContent
+    const title =
+      this.closest(".certificate-card").querySelector("h5").textContent;
 
-    const modal = document.createElement("div")
-    modal.className = "modal fade"
+    const modal = document.createElement("div");
+    modal.className = "modal fade";
     modal.innerHTML = `
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -170,61 +173,58 @@ document.querySelectorAll(".certificate-image img").forEach((img) => {
           </div>
         </div>
       </div>
-    `
+    `;
 
-    document.body.appendChild(modal)
-    const bsModal = new bootstrap.Modal(modal)
-    bsModal.show()
+    document.body.appendChild(modal);
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
 
     modal.addEventListener("hidden.bs.modal", () => {
-      modal.remove()
-    })
-  })
-})
-
+      modal.remove();
+    });
+  });
+});
 
 // Parallax effect for hero section
 window.addEventListener("scroll", () => {
-  const scrolled = window.pageYOffset
-  const parallax = document.querySelector(".hero-section")
-  const speed = scrolled * 0.5
-
-
-})
+  const scrolled = window.pageYOffset;
+  const parallax = document.querySelector(".hero-section");
+  const speed = scrolled * 0.5;
+});
 
 // Add loading class to elements as they come into view
 const observerOptions = {
   threshold: 0.1,
   rootMargin: "0px 0px -50px 0px",
-}
+};
 
 const loadingObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("loading")
-      loadingObserver.unobserve(entry.target)
+      entry.target.classList.add("loading");
+      loadingObserver.unobserve(entry.target);
     }
-  })
-}, observerOptions)
+  });
+}, observerOptions);
 
 // Observe all sections
 document.querySelectorAll("section").forEach((section) => {
-  loadingObserver.observe(section)
-})
+  loadingObserver.observe(section);
+});
 
 // Preloader
 window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader")
+  const preloader = document.getElementById("preloader");
   if (preloader) {
-    preloader.style.opacity = "0"
+    preloader.style.opacity = "0";
     setTimeout(() => {
-      preloader.style.display = "none"
-    }, 500)
+      preloader.style.display = "none";
+    }, 500);
   }
-})
+});
 
 // Add CSS for slideInRight animation
-const style = document.createElement("style")
+const style = document.createElement("style");
 style.textContent = `
     @keyframes slideInRight {
         from {
@@ -236,12 +236,16 @@ style.textContent = `
             opacity: 1;
         }
     }
-`
-document.head.appendChild(style)
+`;
+document.head.appendChild(style);
 
 // Initialize tooltips
-const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-const tooltipList = tooltipTriggerList.map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl))
+const tooltipTriggerList = [].slice.call(
+  document.querySelectorAll('[data-bs-toggle="tooltip"]')
+);
+const tooltipList = tooltipTriggerList.map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
 
 // Console welcome message
 console.log(`
@@ -251,8 +255,7 @@ console.log(`
 🐙 GitHub: https://github.com/Archana12348
 
 Thanks for checking out the code! 😊
-`)
+`);
 document.querySelectorAll(".certificate-card img").forEach((img) => {
-  img.addEventListener("contextmenu", (e) => e.preventDefault())
-})
-
+  img.addEventListener("contextmenu", (e) => e.preventDefault());
+});
